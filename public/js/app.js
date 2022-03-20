@@ -13,22 +13,20 @@ weatherForm.addEventListener("submit", (e) => {
 	messageOne.textContent = "Loading...";
 	messageTwo.textContent = "";
 
-	fetch("http://localhost:3000/weather?address=" + location).then(
-		(response) => {
-			//This will run when the JSON Data Arrives
-			response.json().then((data) => {
-				//This will run when data is done parsed.
-				if (data.error) {
-					console.log(data.error);
-					messageOne.textContent = data.error;
-				} else {
-					//console.log(data);
-					console.log(data.location);
-					console.log(data.Data);
-					messageOne.textContent = data.location;
-					messageTwo.textContent = data.Data;
-				}
-			});
-		}
-	);
+	fetch("/weather?address=" + location).then((response) => {
+		//This will run when the JSON Data Arrives
+		response.json().then((data) => {
+			//This will run when data is done parsed.
+			if (data.error) {
+				console.log(data.error);
+				messageOne.textContent = data.error;
+			} else {
+				//console.log(data);
+				console.log(data.location);
+				console.log(data.Data);
+				messageOne.textContent = data.location;
+				messageTwo.textContent = data.Data;
+			}
+		});
+	});
 });
